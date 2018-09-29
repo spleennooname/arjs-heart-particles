@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>arjs - heart+particles - p.o.c </title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <base href="/dist/">
+
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-particle-system-component@1.0.11/dist/aframe-particle-system-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-animation-component@5.1.1/dist/aframe-animation-component.min.js"></script>
+  <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="assets/css/styles.min.css" />
+
+</head>
+
+<body>
+  <!-- <div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'> -->
+    <a-scene embedded antialias="false"
+      vr-mode-ui="enabled: false"
+      arjs="debugUIEnabled: true; sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; maxDetectionRate: 30">
+        <a-assets>
+          <a-asset-item id="heart-gltf" src="assets/models/heart.gltf"></a-asset-item>
+        </a-assets>
+        <!-- marker -->
+        <a-marker id="ar-anchor" preset="hiro" type="pattern" emitevents="true" arjs-registerevents>
+          <!-- here define the content to display on top of the marker -->
+          <a-entity position="0 0 0" particle-system="type: 2; color: #ffffff, #ff0000; texture: assets/images/heart.png; maxAge: 20; randomize: true; rotationAxis: y; opacity: 0.75; velocitySpread: 3.0 2.0 3.0; blending: 1; velocityValue: 1.0 3.0 1.0; particleCount: 800;">
+            <a-gltf-model
+            shadow="receive: true; type: pcfsoft" src="#heart-gltf"
+              scale="0.07 0.07 0.07" position="0 1 0.0"
+              rotation="-90 0 0"
+              animation_scale="property: scale; from: 0.05 0.05 0.05; to: .08 0.08 0.08; dur: 1500; dir: alternate-reverse; loop: true"
+              animation_rotation="property: rotation; from: -90.0 0.0 -5.0; to: -90.0 0.0 5.0; dur: 1500; dir: alternate-reverse; loop: true">
+            </a-gltf-model>
+          </a-entity>
+        </a-marker>
+
+        <a-entity light="type: ambient; intensity: 0.4;"></a-entity>
+        <a-entity light="type: directional; castShadow: true;" position="0 0.5 1"></a-entity>
+        <a-camera-static id="camera" />
+    </a-scene>
+  <!-- </div> -->
+  <div id="app" v-cloak></div>
+  <script async src="/dist/build.js"></script>
+</body>
+
+</html>
